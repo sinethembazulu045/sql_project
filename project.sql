@@ -49,6 +49,16 @@ CREATE TABLE payments(
     FOREIGN KEY(customer_id) REFERENCES customers(customer_id)
 );
 
+/* 
+    create enum values for status 
+    since status can only take two values
+    Not shipped or Shipped
+*/
+CREATE TYPE status
+AS ENUM (
+    'Shipped',
+    'Not shipped'
+);
 CREATE TABLE orders(
     order_id SERIAL PRIMARY KEY,
     product_id INTEGER,
@@ -56,6 +66,7 @@ CREATE TABLE orders(
     fullfilled_by_employee_id INTEGER,
     date_required DATE,
     date_shipped DATE,
+    status STATUS,
     FOREIGN KEY (product_id) REFERENCES products(product_id),
     FOREIGN KEY (payment_id) REFERENCES payments(payment_id),
     FOREIGN KEY (fullfilled_by_employee_id) REFERENCES employees(employee_id)
@@ -185,8 +196,31 @@ INSERT INTO orders(
         product_id,
         payment_id,
         fullfilled_by_employee_id,
-        date_required
+        date_required,
+        date_shipped,
+        status
     ) 
     VALUES (
-
-    )
+        1,
+        1,
+        2,
+        '05-09-2018',
+        DEFAULT,
+        'Not shipped'
+    ),
+    (
+        1,
+        2,
+        2,
+        '04-09-2018',
+        '03-09-2018',
+        'Shipped'
+    ),
+    (
+        3,
+        3,
+        3,
+        '06-09-2018',
+        DEFAULT,
+        'Not shipped'
+    );
