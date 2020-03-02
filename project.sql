@@ -1,3 +1,4 @@
+-- PART 1
 -- Creating umuzi database
 CREATE DATABASE umuzi;
 
@@ -224,3 +225,77 @@ INSERT INTO orders(
         DEFAULT,
         'Not shipped'
     );
+
+-- PART 2
+
+-- 1. 
+SELECT * FROM customers;
+
+-- 2.
+SELECT first_name FROM customers;
+
+-- 3.
+SELECT first_name FROM customers
+WHERE customer_id = 1;
+
+-- 4.
+UPDATE customers
+SET first_name = 'Lerato',
+last_name = 'Mabitso'
+WHERE customer_id = 1;
+
+-- 5.
+DELETE FROM customers
+WHERE customer_id = 2
+
+-- 6.
+SELECT COUNT(DISTINCT status)
+FROM orders;
+
+-- 7.
+SELECT MAX(amount)
+FROM payments;
+
+-- 8.
+SELECT * FROM customers
+ORDER BY country;
+
+-- 9.
+SELECT * FROM products
+WHERE buy_price BETWEEN 100 AND 600;
+
+-- 10.
+SELECT * FROM customers
+WHERE country = 'Germany' AND city = 'Berlin';
+
+-- 11.
+SELECT * FROM customers 
+WHERE city = 'Cape Town' OR city = 'Durban';
+
+-- 12.
+SELECT * FROM products
+WHERE buy_price > 500;
+
+-- 13.
+SELECT SUM(amount)
+FROM payments;
+
+-- 14
+SELECT COUNT(status)
+FROM orders
+WHERE status = 'Shipped';
+
+-- 15.
+SELECT AVG(buy_price) AS average_price_rands, 
+AVG(buy_price / 12) AS average_price_dollars
+FROM products;
+
+-- 16.
+SELECT * FROM payments
+INNER JOIN customers
+ON payments.payment_id = customers.customer_id;
+
+-- 17.
+SELECT * FROM products
+WHERE description
+LIKE '%Turnable front wheels%';
